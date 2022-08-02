@@ -11,35 +11,35 @@ var loadEvents = function() {
 if(!events) {
     events = [
         {
-            hour: 9,
+            hour: "9 a.m.",
+            description: 'test'
+        },
+        {
+            hour: "10 a.m.",
             description: ''
         },
         {
-            hour: 10,
+            hour: "11 a.m.",
             description: ''
         },
         {
-            hour: 11,
+            hour: "12 p.m.",
             description: ''
         },
         {
-            hour: 12,
+            hour: "1 p.m.",
             description: ''
         },
         {
-            hour: 13,
+            hour: "2 p.m.",
             description: ''
         },
         {
-            hour: 14,
+            hour: "3 p.m.",
             description: ''
         },
         {
-            hour: 15,
-            description: ''
-        },
-        {
-            hour: 16,
+            hour: "4 p.m.",
             description: ''
         },
     ]
@@ -47,19 +47,30 @@ if(!events) {
 }
 
 // create events by looping over events array
-var createEvents = function() {
+var createEvent = function() {
+   
+    for(let i = 0; i < events.length; i++) {
 
-    // create elements that make up an event
-    var timeblockEl = $("<div>").addClass("row timeblock");
-
-    console.log(timeblockEl);
-    
-    
-    // var eventTimeEl = $('<div class ="col-2 hour"></div>').text(eventTime);
-    // var eventDescriptionEl = $('<textarea class="col-8 description"></textarea>').text(eventDescription);
-    // var saveButtonEl = $('<div class="col-2 saveBtn p-3 h-100 align-items-center d-flex justify-content-center"><i class="fa-solid fa-floppy-disk"></i></div>')
-
-    // $('<div class="row timeblock"></div>').append(eventTimeEl).append(eventDescriptionEl).append(saveButtonEl).appendTo("#eventContainer");
+        // create row for event elements
+        var timeblockEl = $("<div></div>").addClass("row timeblock");
+        
+        // create event elements (hour, description, savebtn)
+        var hourEl = $("<div></div>").addClass("hour col-2 d-flex justify-content-center p-3");
+        var eventDetailsEl = $("<textarea></textarea>").addClass("col-8 description");
+        var saveBtnEl = $("<div></div>").addClass("col-2 saveBtn p-3 h-100 align-items-center d-flex justify-content-center");
+        
+        // update event elements from event array
+        hourEl.append(events[i].hour);
+        eventDetailsEl.append(events[i].description);
+        saveBtnEl.append('<i class="fa-solid fa-floppy-disk"></i>');
+        
+        // append elements to timeblockEl
+        timeblockEl.append(hourEl, eventDetailsEl, saveBtnEl);
+        
+        // append timeblockEl to event container
+        $("#eventContainer").append(timeblockEl);
+    }
+        
 };
 
 // audit event times and update color
